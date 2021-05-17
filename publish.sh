@@ -14,10 +14,6 @@ errln() {
     exit 1
 }
 
-if [ ! $(command -v command) ]; then
-    errln "Dart SDK not found. Setup dart sdk using https://github.com/marketplace/actions/setup-dart-sdk"
-fi
-
 set -e
 dart --disable-analytics
 

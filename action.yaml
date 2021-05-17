@@ -1,6 +1,10 @@
 name: pub.dev-cd
 author: RatakondalaArun
 description: This action deployes dart package to pub.dev
+branding:
+  icon: package
+  color: blue
+
 inputs:
   creditionals:
     required: true

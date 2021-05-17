@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-
+# debug
+pwd
 RED='\033[0;31m'
 C_RESET='\033[0m'
 
@@ -19,6 +20,7 @@ dart --disable-analytics
 
 CREDITIONALS=$1
 PACKAGE_PATH=$2
+HOME_DIR=$PWD
 
 # check for creditionals
 if [[ -z $CREDITIONALS ]]; then
@@ -42,7 +44,10 @@ echo $1 >${HOME}/.pub-cache/credentials.json
 echo "🔑 Credentials chechsum"
 sha1sum -b ${HOME}/.pub-cache/credentials.json
 
-cd $PACKAGE_PATH
+cd $HOME_DIR/$PACKAGE_PATH
+
+# debug
+pwd
 
 echo "🏃‍♂️ Dry run"
 dart pub publish -n

@@ -1,0 +1,16 @@
+name: pub.dev-cd
+author: RatakondalaArun
+description: This action deployes dart package to pub.dev
+inputs:
+  creditionals:
+    required: true
+    description: Creditionals for pub.dev site to deploy the package.
+  # package_path:
+  #   default: .
+  #   required: false
+  #   description: Path to the package.
+runs:
+  using: composite
+  steps:
+    - run: $GITHUB_ACTION_PATH/publish.sh ${{inputs.creditionals}}
+      shell: bash

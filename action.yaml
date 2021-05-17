@@ -16,7 +16,6 @@ inputs:
 runs:
   using: composite
   steps:
-    # - run: chmod -x $GITHUB_ACTION_PATH/publish.sh
-    #   shell: bash
-    - run: $GITHUB_ACTION_PATH/publish.sh ${{inputs.creditionals}}
+    - run: >
+        $GITHUB_ACTION_PATH/publish.sh '${{inputs.creditionals}}'
       shell: bash

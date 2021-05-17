@@ -22,17 +22,33 @@ This action takes the following inputs:
   copy the contents of this file and use [GitHub secret](https://docs.github.com/en/actions/reference/encrypted-secrets) to access it in you work flow.
   *If this file doesn't exist try `dart pub logout && dart pub login`.*
 
+- `package_path`: path to the package from root of a repository
+
+  - defaults to root directory `.`
+  - should not start with a `/` and end with `/`
+
 ## Basic Example
 
 ```yaml
-name: cd-action-test
+name: cd-action-test-publish
 on:
   release:
-    types: [published]
+    types: [published] 
 
 jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2.3.4
+
+      - name: 🔧 Setup Dart SDK
+        uses: dart-lang/setup-dart@v1.0
+      - name: 🧪 Run tests
+        run: dart test
+
   publish-to-pub:
     runs-on: ubuntu-latest
+    needs: [tests] # only runs after the job successfully finishes
     steps:
       - uses: actions/checkout@v2.3.4
 
@@ -42,4 +58,5 @@ jobs:
         uses: RatakondalaArun/pub.dev-cd@v1
         with:
           creditionals: ${{secrets.PUB_CREDITIONALS}}
+          # package_path: packages/subpackage
 ```

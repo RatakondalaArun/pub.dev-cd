@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-
+# debug
+pwd
 RED='\033[0;31m'
 C_RESET='\033[0m'
 
@@ -43,6 +44,9 @@ echo "🔑 Credentials chechsum"
 sha1sum -b ${HOME}/.pub-cache/credentials.json
 
 cd $PACKAGE_PATH
+
+# debug
+pwd
 
 echo "🏃‍♂️ Dry run"
 dart pub publish -n

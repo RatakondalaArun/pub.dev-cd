@@ -14,21 +14,24 @@ errln() {
     exit 1
 }
 
-if [ ! $(command -v command) ]; then
-    errln "Dart SDK not found. Setup dart sdk using https://github.com/marketplace/actions/setup-dart-sdk"
-fi
-
 set -e
 dart --disable-analytics
 
 CREDITIONALS=$1
-# PACKAGE_PATH=$2
+PACKAGE_PATH=$2
 
+# check for creditionals
 if [[ -z $CREDITIONALS ]]; then
     echo "❌ invalid creditionals"
     exit 1
 fi
 
+# check if directory exists
+if [ ! -d $PACKAGE_PATH ]; then
+    errln "❌ specified path: $PACKAGE_PATH does not exist in repo"
+fi
+
+# creates directory to store creditionals
 if [ ! -d "${HOME}/.pub-cache" ]; then
     mkdir ${HOME}/.pub-cache
 fi
@@ -39,12 +42,14 @@ echo $1 >${HOME}/.pub-cache/credentials.json
 echo "🔑 Credentials chechsum"
 sha1sum -b ${HOME}/.pub-cache/credentials.json
 
+cd $PACKAGE_PATH
+
 echo "🏃‍♂️ Dry run"
 dart pub publish -n
 verifyResult $? "while running dry run."
 
 echo "📦 Publishing.."
 dart pub publish -f
-verifyResult $? "while publish package."
+verifyResult $? "while publishing package."
 
-echo "📦 Published 🚀"
+echo "🚀 Published"

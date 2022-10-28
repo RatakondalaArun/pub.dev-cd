@@ -13,11 +13,11 @@ This action takes the following inputs:
 - `creditionals`: Uses this account creditionals to publish
   You must be logged in to pub.dev to find this `creditional.json` file under
 
-  | Platform  | path                                                                                  |
-  | --------- | ------------------------------------------------------------------------------------- |
-  | `Windows` | `%LOCALAPPDATA%\Pub\Cache\credentials.json` or `%APPDATA%\Pub\Cache\credentials.json` |
-  | `Linux`   | `~/.pub-cache/credentials.json`                                                       |
-  | `Mac-OS`  | `~/.pub-cache/credentials.json`                                                       |
+  | Platform  | path                                                                                         |
+  | --------- | -------------------------------------------------------------------------------------------- |
+  | `Windows` | `%LOCALAPPDATA%\Pub\Cache\credentials.json` or `%APPDATA%\Pub\Cache\credentials.json`        |
+  | `Linux`   | `~/.pub-cache/credentials.json`                                                              |
+  | `Mac-OS`  | `~/.pub-cache/credentials.json` or `~/Library/Application Support/dart/pub-credentials.json`|                                                 
 
   copy the contents of this file and use [GitHub secret](https://docs.github.com/en/actions/reference/encrypted-secrets) to access it in you work flow.
   *If this file doesn't exist try `dart pub logout && dart pub login`.*
